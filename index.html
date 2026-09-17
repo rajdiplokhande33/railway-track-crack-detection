@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+
+    <nav>
+        <a href="#home">home</a>
+        <a href="#components">components</a>
+        <a href="#working">working</a>
+        <a href="#detection">detection demo</a>
+        <a href="#about">about us</a>
+    </nav>
+    <div id="home">
+    <h3>NAME OF PROJECT</h3><br
+    <p><b>🚆Railway Track Crack Detection System🔍</b></p>
+   <h4>📌about project</h4><br>
+    <p>this project is designed to detect crack or faults in railway track and provide an alert</p><hr>
+    </div>
+    <div class="component-container">
+    <div id="components">
+    <h2><b>⚙️Components</b></h2><br>
+    <ol>
+    <li>Ardunio</li><br>
+    <img src="https://png.pngtree.com/png-vector/20251205/ourmid/pngtree-arduino-uno-microcontroller-development-board-for-electronics-prototyping-and-stem-education-png-image_18129030.webp" height="100" width="100"/>
+    
+    <li>IR sensor</li><br>
+    <img src="https://m.media-amazon.com/images/I/51M0MLm4wRL.jpg" height="100" width="100"/>
+    <li>GSM</li><br>
+    <img src="https://www.turjasuzworld.in/wp-content/uploads/2020/11/1-6-768x768-1.jpg" height="100" width="100"/>
+    <li>LCD</li><br>
+    <img src="https://circuitdigest.com/sites/default/files/field/image/16x2-LCD-Module.jpg" height="100" width="100"/>
+    <li>BUZZER</li><br>
+    <img src="https://img.magnific.com/free-vector/illustration-red-flasher-flashing-beacon-with-siren-police-ambulance-cars_1441-2247.jpg?semt=ais_hybrid&w=740&q=80" height="100" width="100"/>
+    </ol><br><hr>
+</div>
+</div>
+    <div id="working">
+    <h2><b>🔃WORKING</b></h2>
+    <ul>
+        <li>The IR sensors check possible crack or irregularities</li>
+        <li>The sensor sends the signal to the ardunio</li>
+        <li>If a crack is detected, the Arduino activates the buzzer and LED</li>
+        <li>The LCD display shows a warning message such as “CRACK DETECTED”</li>
+        <li>If a GSM module is used, an alert message can also be sent</li>
+        <li>If no problem is detected, the system shows “TRACK SAFE”</li>
+    </ul><hr>
+    </div>
+    <div id="detection">
+
+    <h1>🚆🔍DETECTION DEMO🚆🔍</h1><br>
+    <h3>Railway track status:</h3>
+    <br>
+    <button onclick="checkTrack()">checkTrack</button>
+    <h4 id="result">waiting for detection---</h4>
+
+    <script>
+        function checkTrack(){
+
+            let crack = Math.random() < 0.5;
+            
+            if (crack) {
+                document.getElementById("result").innerHTML="⚠️CRACK DETECTED!";
+            document.getElementById("result").className="danger";
+            }
+                
+            else {
+                document.getElementById("result").innerHTML="✅TRACK SAFE";
+            document.getElementById("result").className="safe";
+            }
+
+        }
+    </script><br>
+    </div><hr>
+    <div id="about">
+
+    <h2><b>🧑‍💻about usℹ️</b></h2>
+    <p>This project is developed as a mini project to demonstrate
+a Railway Track Crack Detection System.</p>
+<p><b>project name:</b>Railway Track Crack Detection System</p>
+<p><b>Technology Used:</b>HTML, CSS and JavaScript</p>
+<p><b>Department:</b> Electronic and Computer Engineering</p>
+    </div>  
+
+<script>
+    if("serviceWorker"in navigator){
+        Window.addEventListener("load",()=>
+    {
+     navigator.serviceWorker.register("service-worker.js")
+     .then(()=>
+    console.log("service Worker registered"))
+    .catch((error)=>
+console.log("service Worker error:",
+error));   
+    });
+    }
+</script>
+</body>
+
+</html>
