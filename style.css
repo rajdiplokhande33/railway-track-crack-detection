@@ -3,13 +3,14 @@ nav{
     background-color: black;
     text-align: center;
     padding: 15px;
+    flex-wrap:nowrap;
 }
 nav a {
     color: white;
     text-decoration: none;
     margin: 0 30px;
     font-size: 20px;
-    flex-wrap:wrap;
+    flex-wrap:nowrap;
     
 }
 nav a:hover {
