@@ -3,14 +3,18 @@ nav{
     background-color: black;
     text-align: center;
     padding: 15px;
+    display:flex;
+    justify-content:center;
+    align-item:center;
+    gap:15px;
     flex-wrap:nowrap;
 }
 nav a {
     color: white;
     text-decoration: none;
-    margin: 0 30px;
+    margin: 0 ;
     font-size: 20px;
-    flex-wrap:nowrap;
+    white-space:nowrap;
     
 }
 nav a:hover {
@@ -213,4 +217,13 @@ h4{
     margin:10px;
     
     text-align:center;
+}
+@media(max-width:600px)
+nav{
+    gap:8px;
+    padding:12px 5px;
+}
+nav a{
+    font-size:12px;
+    white-space:nowrap;
 }
