@@ -9,6 +9,8 @@ nav a {
     text-decoration: none;
     margin: 0 30px;
     font-size: 20px;
+    flex-wrap:wrap;
+    
 }
 nav a:hover {
     color: yellow;
