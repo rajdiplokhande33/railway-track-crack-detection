@@ -62,7 +62,6 @@
     <h4 id="result">waiting for detection---</h4>
 
     <script>
-         
 let port;
 let reader;
 
@@ -74,42 +73,59 @@ async function connectArduino() {
         document.getElementById("result").innerHTML =
             "🟢 Arduino Connected";
 
-        reader = port.readable.getReader();
+        reader = port.readable
+            .pipeThrough(new TextDecoderStream())
+            .getReader();
 
         readArduinoData();
 
     } catch (error) {
         document.getElementById("result").innerHTML =
             "❌ Arduino Connection Failed";
+
         console.log(error);
     }
 }
 
 async function readArduinoData() {
-    const decoder = new TextDecoder();
+    let buffer = "";
 
     while (true) {
         const { value, done } = await reader.read();
 
         if (done) break;
 
-        const data = decoder.decode(value).trim();
+        buffer += value;
 
-        if (data === "CRACK") {
-            document.getElementById("result").innerHTML =
-                "⚠️ CRACK DETECTED!";
-            document.getElementById("result").className = "danger";
-        }
+        let lines = buffer.split("\n");
 
-        if (data === "SAFE") {
-            document.getElementById("result").innerHTML =
-                "✅ TRACK SAFE";
-            document.getElementById("result").className = "safe";
+        buffer = lines.pop();
+
+        for (let line of lines) {
+
+            line = line.trim();
+
+            console.log("Arduino:", line);
+
+            if (line === "CRACK") {
+                document.getElementById("result").innerHTML =
+                    "⚠️ CRACK DETECTED!";
+
+                document.getElementById("result").className = "danger";
+            }
+
+            else if (line === "SAFE") {
+                document.getElementById("result").innerHTML =
+                    "✅ TRACK SAFE";
+
+                document.getElementById("result").className = "safe";
+            }
         }
     }
 }
-
-    </script><br>
+</script>
+         
+ 
     </div><hr>
     <div id="about">
 
