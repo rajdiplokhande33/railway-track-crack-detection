@@ -58,25 +58,57 @@
     <h1>🚆🔍DETECTION DEMO🚆🔍</h1><br>
     <h3>Railway track status:</h3>
     <br>
-    <button onclick="checkTrack()">checkTrack</button>
+     <button onclick="connectArduino()">Connect Arduino</button>
     <h4 id="result">waiting for detection---</h4>
 
     <script>
-        function checkTrack(){
+         
+let port;
+let reader;
 
-            let crack = Math.random() < 0.5;
-            
-            if (crack) {
-                document.getElementById("result").innerHTML="⚠️CRACK DETECTED!";
-            document.getElementById("result").className="danger";
-            }
-                
-            else {
-                document.getElementById("result").innerHTML="✅TRACK SAFE";
-            document.getElementById("result").className="safe";
-            }
+async function connectArduino() {
+    try {
+        port = await navigator.serial.requestPort();
+        await port.open({ baudRate: 9600 });
 
+        document.getElementById("result").innerHTML =
+            "🟢 Arduino Connected";
+
+        reader = port.readable.getReader();
+
+        readArduinoData();
+
+    } catch (error) {
+        document.getElementById("result").innerHTML =
+            "❌ Arduino Connection Failed";
+        console.log(error);
+    }
+}
+
+async function readArduinoData() {
+    const decoder = new TextDecoder();
+
+    while (true) {
+        const { value, done } = await reader.read();
+
+        if (done) break;
+
+        const data = decoder.decode(value).trim();
+
+        if (data === "CRACK") {
+            document.getElementById("result").innerHTML =
+                "⚠️ CRACK DETECTED!";
+            document.getElementById("result").className = "danger";
         }
+
+        if (data === "SAFE") {
+            document.getElementById("result").innerHTML =
+                "✅ TRACK SAFE";
+            document.getElementById("result").className = "safe";
+        }
+    }
+}
+
     </script><br>
     </div><hr>
     <div id="about">
